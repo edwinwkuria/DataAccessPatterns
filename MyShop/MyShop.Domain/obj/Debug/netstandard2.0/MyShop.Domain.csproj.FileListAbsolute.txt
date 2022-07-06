@@ -1,0 +1,10 @@
+C:\Personal Projects\DataAccessPatterns\MyShop\MyShop.Domain\bin\Debug\netstandard2.0\MyShop.Domain.deps.json
+C:\Personal Projects\DataAccessPatterns\MyShop\MyShop.Domain\bin\Debug\netstandard2.0\MyShop.Domain.dll
+C:\Personal Projects\DataAccessPatterns\MyShop\MyShop.Domain\bin\Debug\netstandard2.0\MyShop.Domain.pdb
+C:\Personal Projects\DataAccessPatterns\MyShop\MyShop.Domain\obj\Debug\netstandard2.0\MyShop.Domain.csproj.AssemblyReference.cache
+C:\Personal Projects\DataAccessPatterns\MyShop\MyShop.Domain\obj\Debug\netstandard2.0\MyShop.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Personal Projects\DataAccessPatterns\MyShop\MyShop.Domain\obj\Debug\netstandard2.0\MyShop.Domain.AssemblyInfoInputs.cache
+C:\Personal Projects\DataAccessPatterns\MyShop\MyShop.Domain\obj\Debug\netstandard2.0\MyShop.Domain.AssemblyInfo.cs
+C:\Personal Projects\DataAccessPatterns\MyShop\MyShop.Domain\obj\Debug\netstandard2.0\MyShop.Domain.csproj.CoreCompileInputs.cache
+C:\Personal Projects\DataAccessPatterns\MyShop\MyShop.Domain\obj\Debug\netstandard2.0\MyShop.Domain.dll
+C:\Personal Projects\DataAccessPatterns\MyShop\MyShop.Domain\obj\Debug\netstandard2.0\MyShop.Domain.pdb
