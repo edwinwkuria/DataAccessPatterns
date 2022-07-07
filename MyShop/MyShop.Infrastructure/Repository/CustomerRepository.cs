@@ -1,4 +1,5 @@
 ﻿using MyShop.Domain.Models;
+using MyShop.Infrastructure.Proxy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,10 @@ namespace MyShop.Infrastructure.Repository
         {
 
         }
+        public override IEnumerable<Customer> GetAll()
+        {
+            return base.GetAll().Select(MapToProxy);
+        }
 
         public override Customer Update(Customer entity)
         {
@@ -24,6 +29,18 @@ namespace MyShop.Infrastructure.Repository
             customer.City = entity.City;
 
             return base.Update(customer);
+        }
+
+        private CustomerProxy MapToProxy(Customer customer)
+        {
+            return new CustomerProxy
+            {
+                ShippingAddress = customer.ShippingAddress,
+                PostalCode = customer.PostalCode,
+                Country = customer.Country,
+                Name = customer.Name,
+                City = customer.City,
+            };
         }
     }
 }
