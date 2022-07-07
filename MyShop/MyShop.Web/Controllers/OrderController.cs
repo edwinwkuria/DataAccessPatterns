@@ -11,25 +11,23 @@ namespace MyShop.Web.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly IRepository<Order> orderRepository;
-        private readonly IRepository<Product> productRepository;
+        private readonly IUnitOfWork uow;
 
-        public OrderController(IRepository<Order> orderRepository, IRepository<Product> productRepository)
+        public OrderController(IUnitOfWork _uow)
         {
-            this.orderRepository = orderRepository;
-            this.productRepository = productRepository;
+            this.uow = _uow;
         }
 
         public IActionResult Index()
         {
-            var orders = orderRepository.Find(order => order.OrderDate > DateTime.UtcNow.AddDays(-1));
+            var orders = uow.OrderRepository.Find(order => order.OrderDate > DateTime.UtcNow.AddDays(-1));
 
             return View(orders);
         }
 
         public IActionResult Create()
         {
-            var products = productRepository.GetAll();
+            var products = uow.ProductRepository.GetAll();
 
             Console.WriteLine(products);
             return View(products);
@@ -42,14 +40,27 @@ namespace MyShop.Web.Controllers
 
             if (string.IsNullOrWhiteSpace(model.Customer.Name)) return BadRequest("Customer needs a name");
 
-            var customer = new Customer
+            var customer = uow.CustomerRepository.Find(c => c.Name == model.Customer.Name).FirstOrDefault();
+
+            if (customer != null)
             {
-                Name = model.Customer.Name,
-                ShippingAddress = model.Customer.ShippingAddress,
-                City = model.Customer.City,
-                PostalCode = model.Customer.PostalCode,
-                Country = model.Customer.Country
-            };
+                customer.ShippingAddress = model.Customer.ShippingAddress;
+                customer.PostalCode = model.Customer.PostalCode;
+                customer.City = model.Customer.City;
+                customer.Country = model.Customer.Country;
+                uow.CustomerRepository.Update(customer);
+            }
+            else
+            {
+                customer = new Customer
+                {
+                    Name = model.Customer.Name,
+                    ShippingAddress = model.Customer.ShippingAddress,
+                    City = model.Customer.City,
+                    PostalCode = model.Customer.PostalCode,
+                    Country = model.Customer.Country
+                };
+            }
 
             var order = new Order
             {
@@ -60,9 +71,9 @@ namespace MyShop.Web.Controllers
                 Customer = customer
             };
 
-            orderRepository.Add(order);
+            uow.OrderRepository.Add(order);
 
-            orderRepository.SaveChanges();
+            uow.OrderRepository.SaveChanges();
 
             return Ok("Order Created");
         }
