@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = MyShop.Domain
+build_property.ProjectDir = C:\Personal Projects\DataAccessPatterns\MyShop\MyShop.Domain\
